@@ -16,6 +16,13 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Digital Journal")
         self.resize(600, 600)
 
+        # Učitavanje stila
+        try:
+            with open("style.qss", "r", encoding="utf-8") as f:
+                self.setStyleSheet(f.read())
+        except FileNotFoundError:
+            print("Upozorenje: style.qss nije pronađena.")
+
         # STACK
         self.stack = QStackedWidget()
         self.setCentralWidget(self.stack)
