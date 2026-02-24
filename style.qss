@@ -1,0 +1,56 @@
+/* Glavna pozadina cijelog prozora */
+QWidget {
+    /* Ovo je jako svijetla roza, skoro bijela, da se roze trake ističu */
+    background-color: #F8F0F5; 
+    font-family: 'Comic Sans MS', cursive;
+}
+
+/* Stil za trake (naslovi i datum) */
+QLabel#welcomeLabel, QLabel#subtitleLabel, QLabel#dateLabel {
+    background-color: #C8AABF; /* Tamnija roza sa tvoje slike */
+    color: #333333;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+QLabel#welcomeLabel {
+    font-size: 32px;
+    margin-top: 20px;
+}
+
+QLabel#subtitleLabel {
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+/* Gumbi */
+QPushButton {
+    background-color: #D9D9D9;
+    border-radius: 15px;
+    padding: 15px 25px;
+    font-size: 20px;
+    color: #333333;
+    border: none;
+    min-width: 150px;
+}
+
+QPushButton:hover {
+    background-color: #E5E5E5;
+}
+
+/* Posebne postavke za datum na dnu */
+QLabel#dateLabel {
+    font-size: 22px;
+    margin-top: 30px;
+    font-style: italic;
+}
+
+QPushButton {
+    background-color: #D9D9D9;
+    border-radius: 15px;
+    padding: 10px;
+    font-size: 18px;
+    min-width: 140px;  /* Osigurava da su gumbi slične širine */
+    max-width: 180px;
+    height: 50px;      /* Fiksna visina pomaže da sve stane */
+}
