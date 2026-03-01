@@ -54,3 +54,8 @@ QPushButton {
     max-width: 180px;
     height: 50px;      /* Fiksna visina pomaže da sve stane */
 }
+
+QLabel#calendarLabel {
+    color: #FF0000;
+}
+

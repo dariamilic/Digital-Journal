@@ -18,3 +18,4 @@ class DailyPage(QWidget):
         back_btn = QPushButton("Back")
         back_btn.clicked.connect(self.main_window.show_home)
         layout.addWidget(back_btn)
+

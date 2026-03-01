@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import (
-    QWidget, QVBoxLayout, QLabel,
+    QWidget, QVBoxLayout, QHBoxLayout, QLabel,
     QTextEdit, QPushButton, QMessageBox
 )
 from PySide6.QtCore import Qt
@@ -15,28 +15,43 @@ class JournalPage(QWidget):
         layout = QVBoxLayout(self)
         layout.setSpacing(15)
 
-        label = QLabel("How are you feeling today?")
+        label = QLabel("Kako se osjecas danas?")
         label.setAlignment(Qt.AlignCenter)
-        label.setStyleSheet("font-size: 18px;")
+
+        label.setStyleSheet("font-size: 18px; color: #C8AABF; ")
         layout.addWidget(label)
 
         self.text_edit = QTextEdit()
-        self.text_edit.setPlaceholderText("Piši ovdje svoje misli...")
+        self.text_edit.setPlaceholderText("Olaksaj dusu...")
+        self.text_edit.setStyleSheet("color: #C8AABF; font-size: 16px;")
         layout.addWidget(self.text_edit)
+        
+
+        # Centriran layout za dugmadi
+        buttons_layout = QHBoxLayout()
+        buttons_layout.setSpacing(10)
 
         save_btn = QPushButton("Save")
         save_btn.clicked.connect(self.save_entry)
-        layout.addWidget(save_btn)
+        buttons_layout.addWidget(save_btn)
 
         back_btn = QPushButton("Back")
         back_btn.clicked.connect(self.main_window.show_home)
-        layout.addWidget(back_btn)
+        buttons_layout.addWidget(back_btn)
+
+        buttons_layout.setAlignment(Qt.AlignCenter)
+        layout.addLayout(buttons_layout)
 
     def save_entry(self):
         content = self.text_edit.toPlainText().strip()
 
         if not content:
-            QMessageBox.warning(self, "Prazno", "Ništa nisi napisala.")
+            msg = QMessageBox(self)
+            msg.setWindowTitle("Prazno")
+            msg.setText("Ništa nisi napisala.")
+            msg.setIcon(QMessageBox.Warning)
+            msg.setStyleSheet("color: #C8AABF;")
+            msg.exec()
             return
 
         today = datetime.date.today().strftime('%d-%m-%Y')
@@ -50,4 +65,9 @@ class JournalPage(QWidget):
             f.write(content)
 
         self.text_edit.clear()
-        QMessageBox.information(self, "Spremljeno", "Unos spremljen.")
+        msg = QMessageBox(self)
+        msg.setWindowTitle("Spremljeno")
+        msg.setText("Unos spremljen.")
+        msg.setIcon(QMessageBox.Information)
+        msg.setStyleSheet("color: #C8AABF; font-size: 14px;")
+        msg.exec()
