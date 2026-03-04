@@ -129,8 +129,21 @@ QLineEdit#dailyInput, QTextEdit#notesInput {
     font-family: 'Comic Sans MS', cursive;
 }
 
-/* Notes section */
-QTextEdit#notesInput {
-    min-height: 200px;
+/* --- MONTH PAGE --- */
+QLabel#monthReviewTitle {
+    font-size: 32px;
+    font-weight: normal;
+    color: #333333;
+    margin-bottom: 10px;
+}
+
+QTextEdit#monthReviewInput {
+    background-color: #D9D9D9; /* Siva boja kao na slici */
+    border: none;
+    border-radius: 15px;
+    padding: 25px;
+    font-size: 20px;
+    color: #333333;
+    font-family: 'Comic Sans MS', cursive;
 }
 
