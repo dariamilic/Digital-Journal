@@ -43,12 +43,15 @@ class MainWindow(QMainWindow):
         self.show_home()
 
     def load_stylesheet(self, filename):
-        """Učitava QSS datoteku i primjenjuje je na cijelu aplikaciju"""
-        if os.path.exists(filename):
-            with open(filename, "r", encoding="utf-8") as f:
+        """Učitava CSS datoteku koristeći apsolutnu putanju"""
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        file_path = os.path.join(script_dir, filename)
+        
+        if os.path.exists(file_path):
+            with open(file_path, "r", encoding="utf-8") as f:
                 self.setStyleSheet(f.read())
         else:
-            print(f"Upozorenje: {filename} nije pronađena.")
+            print(f"Upozorenje: {file_path} nije pronađena.")
 
     # Metode za navigaciju
     def show_home(self):
