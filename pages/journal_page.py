@@ -47,14 +47,23 @@ class JournalPage(QWidget):
             QMessageBox.warning(self, "Prazno", "Ništa nisi napisala.")
             return
 
-        # Kreiranje mape s datumom
+        # Glavna mapa za zapise
+        base_dir = "dnevnik zapisi"
+        if not os.path.exists(base_dir):
+            os.makedirs(base_dir)
+
+        # Migracija starih zapisa ako postoje u rootu
+        self.migrate_old_entries(base_dir)
+
+        # Kreiranje podmape s datumom unutar glavne mape
         today_str = datetime.date.today().strftime('%d-%m-%Y')
-        if not os.path.exists(today_str):
-            os.makedirs(today_str)
+        full_date_path = os.path.join(base_dir, today_str)
+        if not os.path.exists(full_date_path):
+            os.makedirs(full_date_path)
 
         # Ime datoteke je trenutno vrijeme
         filename = datetime.datetime.now().strftime('%H-%M-%S') + ".txt"
-        filepath = os.path.join(today_str, filename)
+        filepath = os.path.join(full_date_path, filename)
 
         try:
             with open(filepath, 'w', encoding='utf-8') as f:
@@ -64,3 +73,25 @@ class JournalPage(QWidget):
             QMessageBox.information(self, "Spremljeno", "Tvoj unos je uspješno spremljen.")
         except Exception as e:
             QMessageBox.critical(self, "Greška", f"Došlo je do greške pri spremanju: {e}")
+
+    def migrate_old_entries(self, base_dir):
+        """Pronađi mape s datumom u rootu i premjesti ih u 'dnevnik zapisi'"""
+        import re
+        import shutil
+        
+        # Tražimo mape koje izgledaju kao DD-MM-YYYY
+        date_pattern = re.compile(r'^\d{2}-\d{2}-\d{4}$')
+        
+        for item in os.listdir('.'):
+            if os.path.isdir(item) and date_pattern.match(item) and item != base_dir:
+                try:
+                    dest = os.path.join(base_dir, item)
+                    if not os.path.exists(dest):
+                        shutil.move(item, dest)
+                    else:
+                        # Ako već postoji, premjesti samo datoteke unutra
+                        for file in os.listdir(item):
+                            shutil.move(os.path.join(item, file), os.path.join(dest, file))
+                        os.rmdir(item)
+                except Exception as e:
+                    print(f"Greška pri migraciji {item}: {e}")
