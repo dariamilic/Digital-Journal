@@ -137,12 +137,20 @@ QLabel#monthReviewTitle {
     margin-bottom: 10px;
 }
 
-QTextEdit#monthReviewInput {
-    background-color: #D9D9D9; /* Siva boja kao na slici */
+/* --- GOALS PAGE --- */
+QLabel#goalSectionTitle {
+    font-size: 24px;
+    font-weight: normal;
+    color: #333333;
+    margin-bottom: 5px;
+}
+
+QTextEdit#goalInput {
+    background-color: #E5D9E0; /* Ista boja kao kalendar za konzistentnost */
     border: none;
-    border-radius: 15px;
-    padding: 25px;
-    font-size: 20px;
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 18px;
     color: #333333;
     font-family: 'Comic Sans MS', cursive;
 }
