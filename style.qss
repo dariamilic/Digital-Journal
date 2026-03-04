@@ -35,64 +35,102 @@ QPushButton:hover {
 
 /* Naslov mjeseca (aktualni mjesec) */
 QLabel#monthTitle {
-    font-size: 26px; /* Smanjeno */
+    font-size: 38px;
     font-weight: normal;
-    border-bottom: 2px solid #333333;
-    padding-bottom: 2px;
-    margin-bottom: 10px;
+    border-bottom: 3px solid #007BFF; /* Plava crta iz tvog dizajna */
+    padding-bottom: 5px;
+    margin-bottom: 20px;
 }
 
 /* Sekcija obaveze */
 QLabel#obavezeTitle {
-    font-size: 22px; /* Smanjeno */
+    font-size: 32px;
     font-weight: normal;
-    margin-bottom: 2px;
+    margin-bottom: 5px;
 }
 
-/* Stil za tekst obaveze */
-QLabel#taskLabel {
-    font-size: 16px; /* Puno manje i elegantnije */
-    color: #444444;
-    margin-left: 8px;
+QFrame#separatorLine {
+    background-color: white;
+    max-height: 2px;
+    border: none;
 }
 
-/* Manji bullet points */
+/* Sam kalendar - smanjen i minimalistički */
+QCalendarWidget {
+    background-color: #E5D9E0; /* Svijetlo siva/bež kao na slici */
+    border-radius: 10px;
+    border: none;
+}
+
+/* Unutrašnjost kalendara */
+QCalendarWidget QAbstractItemView:enabled {
+    background-color: #E5D9E0;
+    color: #333333;
+    selection-background-color: #C8AABF;
+    selection-color: white;
+    font-size: 14px;
+}
+
+/* Navigacijske strelice na rubovima (tanke i bijele) */
+QPushButton#navArrow {
+    background-color: transparent;
+    color: white;
+    font-size: 80px;
+    font-weight: 100;
+    border: none;
+}
+
+QPushButton#navArrow:hover {
+    color: #C8AABF;
+}
+
+/* Bullet points za obaveze */
 QFrame#bulletPoint {
     background-color: #D9D9D9;
-    border-radius: 10px;
-    min-width: 20px;
-    max-width: 20px;
-    min-height: 20px;
-    max-height: 20px;
+    border-radius: 15px;
+    min-width: 30px;
+    max-width: 30px;
+    min-height: 30px;
+    max-height: 30px;
 }
 
-/* Male strelice za navigaciju mjeseci */
-QPushButton#smallNavBtn {
-    background-color: transparent;
-    font-size: 18px;
-    color: #C8AABF;
-    border: none;
-    padding: 5px;
+QLabel#taskLabel {
+    font-size: 22px;
+    margin-left: 10px;
 }
-
-QPushButton#smallNavBtn:hover {
-    color: #333333;
-}
-
-/* Sakrivanje scrollbara */
-QScrollArea {
-    border: none;
-}
-QScrollBar:vertical {
-    width: 0px;
-}
-
 
 /* Stil za dnevnik */
-QTextEdit#journalInput {
-    background-color: white;
-    border: 1px solid #C8AABF;
-    border-radius: 20px;
-    padding: 20px;
-    font-size: 18px;
+/* --- DAILY PAGE --- */
+QLabel#dailyDateLabel {
+    font-size: 38px;
+    font-weight: normal;
+    color: #333333;
+    margin-bottom: 5px;
 }
+
+QFrame#dailySeparator {
+    background-color: white;
+    max-height: 2px;
+    border: none;
+    min-width: 600px;
+}
+
+/* Bullet item container */
+QWidget#bulletItem {
+    margin: 5px 0px;
+}
+
+/* Input field for bullets and notes */
+QLineEdit#dailyInput, QTextEdit#notesInput {
+    background: transparent;
+    border: none;
+    color: #333333;
+    font-size: 22px;
+    font-family: 'Comic Sans MS', cursive;
+}
+
+/* Notes section */
+QTextEdit#notesInput {
+    min-height: 200px;
+}
+
