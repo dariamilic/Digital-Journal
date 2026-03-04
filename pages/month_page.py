@@ -1,7 +1,6 @@
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton
 from PySide6.QtCore import Qt
 
-
 class MonthPage(QWidget):
     def __init__(self, main_window):
         super().__init__()
@@ -11,10 +10,11 @@ class MonthPage(QWidget):
         layout.setAlignment(Qt.AlignCenter)
         layout.setSpacing(20)
 
-        label = QLabel("Ovdje će biti mjesecni pregled u obliku pisanog teksta.")
+        label = QLabel("Ovdje će biti mjesečni pregled.")
+        label.setObjectName("placeholderLabel")
         label.setAlignment(Qt.AlignCenter)
         layout.addWidget(label)
 
-        back_btn = QPushButton("Back")
+        back_btn = QPushButton("Nazad")
         back_btn.clicked.connect(self.main_window.show_home)
         layout.addWidget(back_btn)

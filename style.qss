@@ -16,7 +16,79 @@ QLabel#welcomeLabel, QLabel#subtitleLabel, QLabel#dateLabel {
 QLabel#welcomeLabel {
     font-size: 32px;
     margin-top: 20px;
+}/* Glavna pozadina cijele aplikacije */
+#mainWindow, QWidget {
+    background-color: #F8F0F5; 
+    font-family: 'Comic Sans MS', cursive;
 }
+
+/* Naslovi na početnoj stranici */
+QLabel#welcomeLabel {
+    background-color: #C8AABF;
+    color: #333333;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+QLabel#subtitleLabel {
+    background-color: #C8AABF;
+    color: #333333;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 24px;
+}
+
+/* Datum na dnu */
+QLabel#dateLabel {
+    background-color: #C8AABF;
+    color: #333333;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-style: italic;
+}
+
+/* Stil za sve gumbe */
+QPushButton {
+    background-color: #D9D9D9;
+    border-radius: 15px;
+    padding: 12px 20px;
+    font-size: 18px;
+    color: #333333;
+    border: none;
+    min-width: 160px;
+    height: 45px;
+}
+
+QPushButton:hover {
+    background-color: #E5E5E5;
+}
+
+/* Stil za dnevnik (Journal Page) */
+QLabel#journalTitle {
+    font-size: 22px;
+    color: #C8AABF;
+    font-weight: bold;
+}
+
+QTextEdit#journalInput {
+    background-color: white;
+    border: 2px solid #C8AABF;
+    border-radius: 15px;
+    padding: 15px;
+    color: #333333;
+    font-size: 16px;
+}
+
+/* Stil za placeholder labele na ostalim stranicama */
+QLabel#placeholderLabel {
+    font-size: 20px;
+    color: #C8AABF;
+    font-style: italic;
+}
+
 
 QLabel#subtitleLabel {
     font-size: 26px;
