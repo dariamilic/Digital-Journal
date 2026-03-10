@@ -37,9 +37,9 @@ QPushButton:hover {
 QLabel#monthTitle {
     font-size: 38px;
     font-weight: normal;
-    border-bottom: 3px solid #007BFF; /* Plava crta iz tvog dizajna */
+    border-bottom: 3px solid #C8AABF;
     padding-bottom: 5px;
-    margin-bottom: 20px;
+    margin-bottom: 5px; /* Smanjen razmak */
 }
 
 /* Sekcija obaveze */
@@ -55,43 +55,55 @@ QFrame#separatorLine {
     border: none;
 }
 
-/* Sam kalendar - smanjen i minimalistički */
+/* Sam kalendar - minimalistički */
 QCalendarWidget {
-    background-color: #E5D9E0; /* Svijetlo siva/bež kao na slici */
-    border-radius: 10px;
+    background-color: transparent;
     border: none;
 }
 
-/* Unutrašnjost kalendara */
+QFrame#calendarContainer {
+    background-color: transparent; /* Maknuta pozadina (Zeleni križić) */
+    border: none;
+    padding: 0px;
+}
+
+/* Unutrašnjost kalendara (Žuta oznaka) */
 QCalendarWidget QAbstractItemView:enabled {
-    background-color: #E5D9E0;
+    background-color: #E5D9E0; /* Boja pozadine prebačena na samu mrežu */
+    border-radius: 25px; /* Zaobljeni rubovi mreže */
     color: #333333;
-    selection-background-color: #C8AABF;
+    selection-background-color: #9E768F;
     selection-color: white;
     font-size: 14px;
+    outline: none;
 }
 
-/* Navigacijske strelice na rubovima (tanke i bijele) */
+/* Navigacijske strelice (Bijela olovka - zaokruženo) */
 QPushButton#navArrow {
-    background-color: transparent;
+    background-color: #C8AABF;
     color: white;
-    font-size: 80px;
-    font-weight: 100;
+    font-size: 20px;
+    font-weight: bold;
     border: none;
+    border-radius: 35px; /* Više zaobljeno, kao krug/elipsa */
+    min-width: 70px;
+    max-width: 70px;
+    min-height: 70px;
+    max-height: 70px;
 }
 
 QPushButton#navArrow:hover {
-    color: #C8AABF;
+    background-color: #9E768F;
 }
 
-/* Bullet points za obaveze */
-QFrame#bulletPoint {
-    background-color: #D9D9D9;
-    border-radius: 15px;
-    min-width: 30px;
-    max-width: 30px;
-    min-height: 30px;
-    max-height: 30px;
+/* Okvir obaveza (Plava olovka - nevidljiv) */
+QScrollArea {
+    border: none;
+    background: transparent;
+}
+
+QScrollArea > QWidget > QWidget {
+    background: transparent;
 }
 
 QLabel#taskLabel {

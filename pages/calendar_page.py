@@ -22,14 +22,14 @@ class CalendarPage(QWidget):
         header_layout.setAlignment(Qt.AlignCenter)
         
         self.btn_prev = QPushButton("<")
-        self.btn_prev.setObjectName("smallNavBtn")
+        self.btn_prev.setObjectName("navArrow") # Promijenjeno u navArrow
         self.btn_prev.clicked.connect(self.prev_month)
         
         self.month_label = QLabel()
         self.month_label.setObjectName("monthTitle")
         
         self.btn_next = QPushButton(">")
-        self.btn_next.setObjectName("smallNavBtn")
+        self.btn_next.setObjectName("navArrow") # Promijenjeno u navArrow
         self.btn_next.clicked.connect(self.next_month)
         
         header_layout.addWidget(self.btn_prev)
@@ -42,14 +42,20 @@ class CalendarPage(QWidget):
         content_h_layout.setSpacing(40)
         layout.addLayout(content_h_layout)
 
-        # Kalendar
+        # Kalendar (uokviren u kontejner sa zaobljenim rubovima)
+        self.calendar_container = QFrame()
+        self.calendar_container.setObjectName("calendarContainer")
+        calendar_layout = QVBoxLayout(self.calendar_container)
+        
         self.calendar = QCalendarWidget()
         self.calendar.setFixedSize(280, 280)
         self.calendar.setNavigationBarVisible(False)
         self.calendar.setVerticalHeaderFormat(QCalendarWidget.NoVerticalHeader)
         self.calendar.selectionChanged.connect(self.update_task_list)
         self.calendar.clicked.connect(self.add_task_prompt)
-        content_h_layout.addWidget(self.calendar, 0, Qt.AlignTop)
+        
+        calendar_layout.addWidget(self.calendar)
+        content_h_layout.addWidget(self.calendar_container, 0, Qt.AlignTop)
 
         # Obaveze
         tasks_v_layout = QVBoxLayout()
@@ -64,6 +70,7 @@ class CalendarPage(QWidget):
         line.setObjectName("separatorLine")
         line.setFrameShape(QFrame.HLine)
         tasks_v_layout.addWidget(line)
+        tasks_v_layout.addSpacing(-10) # Povlačenje crte gore (Crvena oznaka)
 
         self.scroll = QScrollArea()
         self.scroll.setWidgetResizable(True)
@@ -86,7 +93,7 @@ class CalendarPage(QWidget):
         self.update_task_list()
 
     def update_month_label(self):
-        """Ažurira naslov na temelju trenutno prikazanog mjeseca u kalendaru"""
+        """Ažurira naslov i postavlja boje vikenda (Ljubičasta oznaka)"""
         month = self.calendar.monthShown()
         year = self.calendar.yearShown()
         month_names = [
@@ -95,6 +102,14 @@ class CalendarPage(QWidget):
         ]
         month_name = month_names[month - 1]
         self.month_label.setText(f"{month_name.lower()} {year}")
+
+        # Postavljanje boje vikenda (Ljubičasta oznaka)
+        weekend_format = QTextCharFormat()
+        weekend_format.setForeground(QColor("#C8AABF")) # Boja crte ispod mjeseca
+        
+        # Prolazimo kroz sve dane u tjednu (Subota=6, Nedjelja=7)
+        self.calendar.setWeekdayTextFormat(Qt.Saturday, weekend_format)
+        self.calendar.setWeekdayTextFormat(Qt.Sunday, weekend_format)
 
     def prev_month(self):
         self.calendar.showPreviousMonth()
@@ -125,7 +140,7 @@ class CalendarPage(QWidget):
     def highlight_date(self, date):
         """Zatamnjuje datum u kalendaru ako ima obavezu"""
         fmt = QTextCharFormat()
-        fmt.setBackground(QColor("#C8AABF")) # Boja tvojih naslova
+        fmt.setBackground(QColor("#9E768F")) # Tamnija roza boja
         fmt.setForeground(Qt.white)
         self.calendar.setDateTextFormat(date, fmt)
 
