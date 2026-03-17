@@ -40,53 +40,62 @@ class CalendarPage(QWidget):
         # 2. Središnji dio (Kalendar + Obaveze)
         content_h_layout = QHBoxLayout()
         content_h_layout.setSpacing(40)
+        content_h_layout.setContentsMargins(0, 20, 0, 0) # Spuštanje cijelog reda
         layout.addLayout(content_h_layout)
 
-        # Kalendar (uokviren u kontejner sa zaobljenim rubovima)
-        self.calendar_container = QFrame()
-        self.calendar_container.setObjectName("calendarContainer")
-        calendar_layout = QVBoxLayout(self.calendar_container)
-        
-        self.calendar = QCalendarWidget()
-        self.calendar.setFixedSize(280, 280)
-        self.calendar.setNavigationBarVisible(False)
-        self.calendar.setVerticalHeaderFormat(QCalendarWidget.NoVerticalHeader)
-        self.calendar.selectionChanged.connect(self.update_task_list)
-        self.calendar.clicked.connect(self.add_task_prompt)
-        
-        calendar_layout.addWidget(self.calendar)
-        content_h_layout.addWidget(self.calendar_container, 0, Qt.AlignTop)
+        # Lijeva strana (Kalendar)
+        left_v_layout = QVBoxLayout()
+        left_v_layout.setAlignment(Qt.AlignTop)
+        content_h_layout.addLayout(left_v_layout)
 
-        # Obaveze
-        tasks_v_layout = QVBoxLayout()
-        tasks_v_layout.setAlignment(Qt.AlignTop)
-        content_h_layout.addLayout(tasks_v_layout)
+        # Desna strana (Obaveze)
+        right_v_layout = QVBoxLayout()
+        right_v_layout.setAlignment(Qt.AlignTop)
+        content_h_layout.addLayout(right_v_layout)
 
+        # Obaveze (Naslov + Linija) - Desna strana
         obaveze_label = QLabel("obaveze")
         obaveze_label.setObjectName("obavezeTitle")
-        tasks_v_layout.addWidget(obaveze_label)
+        right_v_layout.addWidget(obaveze_label)
+        left_v_layout.addSpacing(45)
+
 
         line = QFrame()
         line.setObjectName("separatorLine")
         line.setFrameShape(QFrame.HLine)
-        tasks_v_layout.addWidget(line)
-        tasks_v_layout.addSpacing(-10) # Povlačenje crte gore (Crvena oznaka)
+        right_v_layout.addWidget(line)
 
+        # Poravnanje: Kalendar se spušta za visinu naslova i linije (cca 45px)
+        left_v_layout.addSpacing(85)
+
+        self.calendar = QCalendarWidget()
+        self.calendar.setFixedSize(300, 380)
+        self.calendar.setNavigationBarVisible(False)
+        self.calendar.setVerticalHeaderFormat(QCalendarWidget.NoVerticalHeader)
+        self.calendar.selectionChanged.connect(self.update_task_list)
+        self.calendar.clicked.connect(self.add_task_prompt)
+        left_v_layout.addWidget(self.calendar)
+
+        # Ploča za obaveze (Scroll Area) - Desna strana
         self.scroll = QScrollArea()
         self.scroll.setWidgetResizable(True)
+        self.scroll.setFixedHeight(380) # Ista visina kao kalendar
         self.tasks_container = QWidget()
         self.tasks_layout = QVBoxLayout(self.tasks_container)
         self.tasks_layout.setAlignment(Qt.AlignTop)
+        self.tasks_layout.setSpacing(0) # Skupljene obaveze
+        self.tasks_layout.setContentsMargins(0, 0, 0, 0)
         self.scroll.setWidget(self.tasks_container)
-        tasks_v_layout.addWidget(self.scroll)
+        right_v_layout.addWidget(self.scroll)
 
-        # Gumb za povratak (mali i diskretan u kutu)
+        # Gumb za povratak (sada centriran na dnu)
         footer_layout = QHBoxLayout()
         back_btn = QPushButton("Back")
         back_btn.setFixedWidth(100)
         back_btn.clicked.connect(self.main_window.show_home)
         footer_layout.addStretch()
         footer_layout.addWidget(back_btn)
+        footer_layout.addStretch()
         layout.addLayout(footer_layout)
 
         self.update_month_label()
@@ -162,6 +171,7 @@ class CalendarPage(QWidget):
             if date.month() == current_month and date.year() == current_year:
                 for task in task_list:
                     item_layout = QHBoxLayout()
+                    item_layout.setContentsMargins(5, 2, 5, 2) # Smanjeni razmaci
                     
                     # Bullet point
                     bullet = QFrame()

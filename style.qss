@@ -31,84 +31,112 @@ QPushButton:hover {
     background-color: #E2E2E2;
 }
 
-/* --- KALENDAR STRANICA --- */
+/* --- KALENDAR STRANICA (SREĐENA VERZIJA) --- */
 
-/* Naslov mjeseca (aktualni mjesec) */
+/* Glavni naslov mjeseca */
 QLabel#monthTitle {
-    font-size: 38px;
-    font-weight: normal;
+    font-size: 34px;
+    font-weight: bold;
+    color: #4A4A4A;
     border-bottom: 3px solid #C8AABF;
-    padding-bottom: 5px;
-    margin-bottom: 5px; /* Smanjen razmak */
+    padding-bottom: 10px;
+    margin-bottom: 15px;
 }
 
-/* Sekcija obaveze */
+/* Sekcija obaveze - Naslov */
 QLabel#obavezeTitle {
-    font-size: 32px;
-    font-weight: normal;
+    font-size: 28px;
+    font-weight: bold;
+    color: #4A4A4A;
     margin-bottom: 5px;
 }
 
 QFrame#separatorLine {
-    background-color: white;
+    background-color: #C8AABF;
     max-height: 2px;
     border: none;
+    margin-bottom: 10px;
 }
 
-/* Sam kalendar - minimalistički */
+/* Kalendar Widget - Glavni kontejner */
 QCalendarWidget {
+    background-color: white;
+    border-radius: 20px;
+}
+
+QFrame#calendarContainer, QFrame#tasksContainer {
     background-color: transparent;
     border: none;
 }
 
-QFrame#calendarContainer {
-    background-color: transparent; /* Maknuta pozadina (Zeleni križić) */
-    border: none;
-    padding: 0px;
-}
-
-/* Unutrašnjost kalendara (Žuta oznaka) */
-QCalendarWidget QAbstractItemView:enabled {
-    background-color: #E5D9E0; /* Boja pozadine prebačena na samu mrežu */
-    border-radius: 25px; /* Zaobljeni rubovi mreže */
+/* Mreža kalendara (Datumi) */
+QCalendarWidget QAbstractItemView {
+    background-color: #F7F3F5; 
+    border-radius: 15px;
     color: #333333;
+    font-size: 15px;
     selection-background-color: #9E768F;
     selection-color: white;
-    font-size: 14px;
-    outline: none;
+    outline: none; 
 }
 
-/* Navigacijske strelice (Bijela olovka - zaokruženo) */
+/* HOVER EFEKT: */
+QCalendarWidget QAbstractItemView:hover {
+    background-color: #E5D9E0;
+    border-radius: 15px;
+}
+
+/* OKRUGLI ODABIR: */
+QCalendarWidget QAbstractItemView::item:selected {
+    border-radius: 15px;  
+    background-color: #9E768F;
+    color: white;
+}
+
+/* NAVIGACIJSKE STRELIĆE  */
 QPushButton#navArrow {
     background-color: #C8AABF;
     color: white;
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 18px;
     border: none;
-    border-radius: 35px; /* Više zaobljeno, kao krug/elipsa */
-    min-width: 70px;
-    max-width: 70px;
-    min-height: 70px;
-    max-height: 70px;
+    min-width: 40px;
+    max-width: 40px;
+    min-height: 40px;
+    max-height: 40px;
+    border-radius: 20px; /* Krug */
 }
 
 QPushButton#navArrow:hover {
     background-color: #9E768F;
 }
 
-/* Okvir obaveza (Plava olovka - nevidljiv) */
+/* Dio za obaveze (Scroll Area) */
 QScrollArea {
-    border: none;
-    background: transparent;
+    border: 1px solid #E5D9E0;
+    border-radius: 15px;
+    background: white;
+    padding: 5px;
 }
 
-QScrollArea > QWidget > QWidget {
-    background: transparent;
+QFrame#bulletPoint {
+    background-color: #C8AABF;
+    min-width: 8px;
+    max-width: 8px;
+    min-height: 8px;
+    max-height: 8px;
+    border-radius: 4px;
+    margin-right: 5px;
 }
 
 QLabel#taskLabel {
-    font-size: 22px;
-    margin-left: 10px;
+    font-size: 16px;
+    color: #555555;
+    padding: 2px;
+}
+
+/* Gornji dio kalendara (gdje su imena dana) */
+QCalendarWidget QWidget#qt_calendar_navigationbar { 
+    background-color: transparent; 
 }
 
 /* Stil za dnevnik */
@@ -166,4 +194,36 @@ QTextEdit#goalInput {
     color: #333333;
     font-family: 'Comic Sans MS', cursive;
 }
+
+/* QInputDialog stilovi */
+QInputDialog {
+    background-color: #F8F0F5;
+    border: 2px solid #C8AABF;
+    border-radius: 14px;
+}
+
+QInputDialog QLabel {
+    color: #4A4A4A;
+}
+
+QInputDialog QLineEdit {
+    background-color: white;
+    color: #333333;
+    border: 1px solid #C8AABF;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+QInputDialog QPushButton {
+    background-color: #C8AABF;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 6px 12px;
+}
+
+QInputDialog QPushButton:hover {
+    background-color: #9E768F;
+}
+
 
