@@ -13,7 +13,7 @@ class JournalPage(QWidget):
         layout.setContentsMargins(40, 40, 40, 40)
 
         # Naslov
-        title = QLabel("Kako se osjećaš danas?")
+        title = QLabel("How are you feeling today?")
         title.setObjectName("journalTitle")
         title.setAlignment(Qt.AlignCenter)
         layout.addWidget(title)
@@ -21,7 +21,7 @@ class JournalPage(QWidget):
         # Polje za unos teksta
         self.text_edit = QTextEdit()
         self.text_edit.setObjectName("journalInput")
-        self.text_edit.setPlaceholderText("Olakšaj dušu...")
+        self.text_edit.setPlaceholderText("Ease your mind…")
         layout.addWidget(self.text_edit)
 
         # Kontrole (Spremi i Nazad)
@@ -29,10 +29,10 @@ class JournalPage(QWidget):
         controls_layout.setSpacing(15)
         controls_layout.setAlignment(Qt.AlignCenter)
 
-        save_btn = QPushButton("Spremi")
+        save_btn = QPushButton("Save")
         save_btn.clicked.connect(self.save_entry)
         
-        back_btn = QPushButton("Nazad")
+        back_btn = QPushButton("Back")
         back_btn.clicked.connect(self.main_window.show_home)
 
         controls_layout.addWidget(save_btn)
@@ -44,7 +44,7 @@ class JournalPage(QWidget):
         content = self.text_edit.toPlainText().strip()
 
         if not content:
-            QMessageBox.warning(self, "Prazno", "Ništa nisi napisala.")
+            QMessageBox.warning(self, "Empty", "There is nothing to save?")
             return
 
         # Glavna mapa za zapise
@@ -70,9 +70,9 @@ class JournalPage(QWidget):
                 f.write(content)
             
             self.text_edit.clear()
-            QMessageBox.information(self, "Spremljeno", "Tvoj unos je uspješno spremljen.")
+            QMessageBox.information(self, "Saved", "Your record has been saved successfully.")
         except Exception as e:
-            QMessageBox.critical(self, "Greška", f"Došlo je do greške pri spremanju: {e}")
+            QMessageBox.critical(self, "Error", f"An error occurred while saving. {e}")
 
     def migrate_old_entries(self, base_dir):
         """Pronađi mape s datumom u rootu i premjesti ih u 'dnevnik zapisi'"""
@@ -94,4 +94,4 @@ class JournalPage(QWidget):
                             shutil.move(os.path.join(item, file), os.path.join(dest, file))
                         os.rmdir(item)
                 except Exception as e:
-                    print(f"Greška pri migraciji {item}: {e}")
+                    print(f"Migration error {item}: {e}")

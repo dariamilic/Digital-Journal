@@ -28,7 +28,7 @@ class MonthPage(QWidget):
         main_h_layout.addLayout(center_v_layout, 1)
 
         # 1. Naslov (Pitanje iz tvog dizajna)
-        self.header_label = QLabel("Napiši što ti se posebno desilo u MJESECU\nna što si ponosna i kako si napredovala <3")
+        self.header_label = QLabel("")
         self.header_label.setObjectName("monthReviewTitle")
         self.header_label.setAlignment(Qt.AlignCenter)
         center_v_layout.addWidget(self.header_label)
@@ -42,7 +42,7 @@ class MonthPage(QWidget):
         # 3. Veliki prozor za tekst (Sivi okvir kao na slici)
         self.text_edit = QTextEdit()
         self.text_edit.setObjectName("monthReviewInput")
-        self.text_edit.setPlaceholderText("Tvoj mjesec u par rečenica...")
+        self.text_edit.setPlaceholderText("A little snapshot of your month, in a few sentences.")
         center_v_layout.addWidget(self.text_edit)
 
         # 4. Kontrole (Spremi i Nazad)
@@ -50,7 +50,7 @@ class MonthPage(QWidget):
         controls_layout.setSpacing(20)
         controls_layout.setAlignment(Qt.AlignCenter)
 
-        save_btn = QPushButton("Spremi")
+        save_btn = QPushButton("Save")
         save_btn.clicked.connect(self.save_month_review)
         
         back_btn = QPushButton("Back")
@@ -72,13 +72,17 @@ class MonthPage(QWidget):
     def update_display(self):
         """Ažurira naslov i učitava tekst za trenutni mjesec"""
         month_names = [
-            "Siječanj", "Veljača", "Ožujak", "Travanj", "Svibanj", "Lipanj",
-            "Srpanj", "Kolovoz", "Rujan", "Listopad", "Studeni", "Prosinac"
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
         ]
         month_name = month_names[self.current_date.month() - 1]
         year = self.current_date.year()
         
-        self.month_label.setText(f"{month_name.lower()} {year}")
+        ##self.month_label.setText(f"{month_name} {year}")
+        self.header_label.setText(
+            f"Few words about your {month_name} {year}\n" 
+            "the moments that mattered, the things you’re proud of"
+        )
         self.load_month_review()
 
     def prev_month(self):
@@ -92,8 +96,8 @@ class MonthPage(QWidget):
     def get_file_path(self):
         """Vraća putanju do .txt datoteke za trenutni mjesec"""
         month_names_en = [
-            "sijecanj", "veljaca", "ozujak", "travanj", "svibanj", "lipanj",
-            "srpanj", "kolovoz", "rujan", "listopad", "studeni", "prosinac"
+           "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
         ]
         month_name = month_names_en[self.current_date.month() - 1]
         year = self.current_date.year()
@@ -112,9 +116,9 @@ class MonthPage(QWidget):
         try:
             with open(filepath, 'w', encoding='utf-8') as f:
                 f.write(content)
-            QMessageBox.information(self, "Spremljeno", "Pregled mjeseca je uspješno spremljen.")
+            QMessageBox.information(self, "Saved", "The monthly review has been successfully saved.")
         except Exception as e:
-            QMessageBox.critical(self, "Greška", f"Došlo je do greške pri spremanju: {e}")
+            QMessageBox.critical(self, "Error", f"An error occurred while saving: {e}")
 
     def load_month_review(self):
         """Učitava tekst iz .txt datoteke ako postoji"""
@@ -124,7 +128,7 @@ class MonthPage(QWidget):
                 with open(filepath, 'r', encoding='utf-8') as f:
                     self.text_edit.setPlainText(f.read())
             except Exception as e:
-                print(f"Greška pri učitavanju: {e}")
+                print(f"Loading error..{e}")
                 self.text_edit.clear()
         else:
             self.text_edit.clear()

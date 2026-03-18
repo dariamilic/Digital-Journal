@@ -33,7 +33,7 @@ class GoalsPage(QWidget):
         self.month_label.setAlignment(Qt.AlignCenter)
         center_v_layout.addWidget(self.month_label)
         
-        goals_subtitle = QLabel("ciljevi")
+        goals_subtitle = QLabel("Goals")
         goals_subtitle.setObjectName("monthReviewTitle") # Koristimo isti stil za podnaslov
         goals_subtitle.setAlignment(Qt.AlignCenter)
         center_v_layout.addWidget(goals_subtitle)
@@ -44,10 +44,10 @@ class GoalsPage(QWidget):
         center_v_layout.addLayout(grid_layout)
 
         self.sections = {
-            "zahvale": self.create_goal_section("Zahvale", grid_layout, 0, 0),
-            "ponosna": self.create_goal_section("na što si ponosna", grid_layout, 0, 1),
-            "fizicka": self.create_goal_section("fizička sprema", grid_layout, 1, 0),
-            "emocionalno": self.create_goal_section("emocionalno", grid_layout, 1, 1)
+            "zahvale": self.create_goal_section("Acknowledgements", grid_layout, 0, 0),
+            "ponosna": self.create_goal_section("What are you proud of", grid_layout, 0, 1),
+            "fizicka": self.create_goal_section("Physical fitness", grid_layout, 1, 0),
+            "emocionalno": self.create_goal_section("Emotional well-being", grid_layout, 1, 1)
         }
 
         # 3. Kontrole (Spremi i Nazad)
@@ -55,7 +55,7 @@ class GoalsPage(QWidget):
         controls_layout.setSpacing(20)
         controls_layout.setAlignment(Qt.AlignCenter)
 
-        save_btn = QPushButton("Spremi")
+        save_btn = QPushButton("Save")
         save_btn.clicked.connect(self.save_goals)
         
         back_btn = QPushButton("Back")
@@ -92,8 +92,8 @@ class GoalsPage(QWidget):
     def update_display(self):
         """Ažurira naslov i učitava podatke za trenutni mjesec"""
         month_names = [
-            "Siječanj", "Veljača", "Ožujak", "Travanj", "Svibanj", "Lipanj",
-            "Srpanj", "Kolovoz", "Rujan", "Listopad", "Studeni", "Prosinac"
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
         ]
         month_name = month_names[self.current_date.month() - 1]
         year = self.current_date.year()

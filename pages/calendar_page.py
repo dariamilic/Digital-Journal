@@ -53,20 +53,7 @@ class CalendarPage(QWidget):
         right_v_layout.setAlignment(Qt.AlignTop)
         content_h_layout.addLayout(right_v_layout)
 
-        # Obaveze (Naslov + Linija) - Desna strana
-        obaveze_label = QLabel("obaveze")
-        obaveze_label.setObjectName("obavezeTitle")
-        right_v_layout.addWidget(obaveze_label)
-        left_v_layout.addSpacing(45)
-
-
-        line = QFrame()
-        line.setObjectName("separatorLine")
-        line.setFrameShape(QFrame.HLine)
-        right_v_layout.addWidget(line)
-
-        # Poravnanje: Kalendar se spušta za visinu naslova i linije (cca 45px)
-        left_v_layout.addSpacing(85)
+       
 
         self.calendar = QCalendarWidget()
         self.calendar.setFixedSize(300, 380)
@@ -106,8 +93,8 @@ class CalendarPage(QWidget):
         month = self.calendar.monthShown()
         year = self.calendar.yearShown()
         month_names = [
-            "Siječanj", "Veljača", "Ožujak", "Travanj", "Svibanj", "Lipanj",
-            "Srpanj", "Kolovoz", "Rujan", "Listopad", "Studeni", "Prosinac"
+           "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
         ]
         month_name = month_names[month - 1]
         self.month_label.setText(f"{month_name.lower()} {year}")
@@ -131,7 +118,7 @@ class CalendarPage(QWidget):
     def add_task_prompt(self, date):
         """Otvara prozor za unos obaveze kada se klikne na datum"""
         date_str = date.toString("d.M.")
-        text, ok = QInputDialog.getText(self, "Nova obaveza", f"Obaveza za {date_str}:")
+        text, ok = QInputDialog.getText(self, "New task", f"Task for {date_str}:")
         
         if ok and text:
             full_task = f"{date_str} {text}"

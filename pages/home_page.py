@@ -14,11 +14,11 @@ class HomePage(QWidget):
         layout.setSpacing(30)
 
         # Naslovi
-        self.welcome = QLabel("dobrodošla natrag!")
+        self.welcome = QLabel("welcome back!")
         self.welcome.setObjectName("welcomeLabel")
         self.welcome.setAlignment(Qt.AlignCenter)
         
-        self.subtitle = QLabel("što ti je danas na umu?")
+        self.subtitle = QLabel("What’s been on your mind today?")
         self.subtitle.setObjectName("subtitleLabel")
         self.subtitle.setAlignment(Qt.AlignCenter)
 
@@ -32,17 +32,17 @@ class HomePage(QWidget):
         # Prvi red gumba
         row1 = QHBoxLayout()
         row1.setSpacing(20)
-        row1.addWidget(self.create_styled_button("kalendar", self.main_window.show_calendar))
-        row1.addWidget(self.create_styled_button("dnevne obaveze", self.main_window.show_daily))
-        row1.addWidget(self.create_styled_button("ciljevi", self.main_window.show_goals))
+        row1.addWidget(self.create_styled_button("Calendar", self.main_window.show_calendar))
+        row1.addWidget(self.create_styled_button("Daily tasks", self.main_window.show_daily))
+        row1.addWidget(self.create_styled_button("Goals", self.main_window.show_goals))
         buttons_container.addLayout(row1)
 
         # Drugi red gumba
         row2 = QHBoxLayout()
         row2.setSpacing(20)
         row2.addStretch()
-        row2.addWidget(self.create_styled_button("pregled mjeseca", self.main_window.show_month))
-        row2.addWidget(self.create_styled_button("dnevnik", self.main_window.show_journal))
+        row2.addWidget(self.create_styled_button("Month overview", self.main_window.show_month))
+        row2.addWidget(self.create_styled_button("Journal", self.main_window.show_journal))
         row2.addStretch()
         buttons_container.addLayout(row2)
 

@@ -91,7 +91,7 @@ class DailyPage(QWidget):
         
         input_field = QLineEdit()
         input_field.setObjectName("dailyInput")
-        input_field.setPlaceholderText("Upiši obavezu...")
+        input_field.setPlaceholderText("Add a task.")
         item_layout.addWidget(input_field)
         
         container = QWidget()
@@ -100,7 +100,7 @@ class DailyPage(QWidget):
         self.bullets_container.addWidget(container)
 
     def update_date_display(self):
-        days = ["ponedjeljak", "utorak", "srijeda", "četvrtak", "petak", "subota", "nedjelja"]
+        days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
         day_name = days[self.current_date.dayOfWeek() - 1]
         date_str = self.current_date.toString("d.M.")
         self.date_label.setText(f"{day_name} {date_str}")
