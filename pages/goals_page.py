@@ -32,12 +32,7 @@ class GoalsPage(QWidget):
         self.month_label.setObjectName("monthTitle")
         self.month_label.setAlignment(Qt.AlignCenter)
         center_v_layout.addWidget(self.month_label)
-        
-        goals_subtitle = QLabel("Goals")
-        goals_subtitle.setObjectName("monthReviewTitle") # Koristimo isti stil za podnaslov
-        goals_subtitle.setAlignment(Qt.AlignCenter)
-        center_v_layout.addWidget(goals_subtitle)
-
+       
         # 2. Mreža s 4 prozora (Zahvale, Ponosna, Fizička sprema, Emocionalno)
         grid_layout = QGridLayout()
         grid_layout.setSpacing(30)
