@@ -7,12 +7,18 @@ from pages.calendar_page import CalendarPage
 from pages.goals_page import GoalsPage
 from pages.daily_page import DailyPage
 from pages.month_page import MonthPage
+from database.models import create_tables
+from database.queries import save_entry, get_all_entries
+
+# Run once when app starts to make sure tables exist
+create_tables()
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.setWindowTitle("Digitalni Dnevnik")
+        self.setWindowTitle("Digital Journal")
         self.resize(800, 600)
         self.setObjectName("mainWindow")
 
@@ -51,7 +57,7 @@ class MainWindow(QMainWindow):
             with open(file_path, "r", encoding="utf-8") as f:
                 self.setStyleSheet(f.read())
         else:
-            print(f"Upozorenje: {file_path} nije pronađena.")
+            print(f"Warning: {file_path} not found.")
 
     # Metode za navigaciju
     def show_home(self):
