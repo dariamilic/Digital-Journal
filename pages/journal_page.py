@@ -12,6 +12,13 @@ class JournalPage(QWidget):
         layout.setSpacing(20)
         layout.setContentsMargins(40, 40, 40, 40)
 
+        # Date label in top right corner
+        today = datetime.date.today().strftime("%d.%m.%Y.")
+        date_label = QLabel(today)
+        date_label.setObjectName("dateLabel")
+        date_label.setAlignment(Qt.AlignRight)
+        layout.addWidget(date_label)
+
         title = QLabel("How are you feeling today?")
         title.setObjectName("journalTitle")
         title.setAlignment(Qt.AlignCenter)
@@ -46,9 +53,10 @@ class JournalPage(QWidget):
         try:
             conn = get_connection()
             cursor = conn.cursor()
+            # No date column needed — created_at fills automatically
             cursor.execute(
-                "INSERT INTO journal (date, entry) VALUES (%s, %s)",
-                (datetime.date.today(), content)
+                "INSERT INTO journal (entry) VALUES (%s)",
+                (content,)
             )
             conn.commit()
             cursor.close()

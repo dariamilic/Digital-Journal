@@ -6,12 +6,12 @@ def create_tables():
 
     # 1. Journal table
     cursor.execute("""
-        CREATE TABLE IF NOT EXISTS journal (
-            id SERIAL PRIMARY KEY,
-            date DATE NOT NULL,
-            entry TEXT NOT NULL
-        )
-    """)
+    CREATE TABLE IF NOT EXISTS journal (
+        id SERIAL PRIMARY KEY,
+        entry VARCHAR(100) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+""")
 
     # 2. Month overview table
     cursor.execute("""
